@@ -556,26 +556,42 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
             <div className={`sticky top-24 z-100 mb-24 transition-all duration-500 py-8 border-y ${isDark ? 'bg-[#0F0F0F]/90 border-white/5' : 'bg-[#FFF5F0]/90 border-black/5'} backdrop-blur-2xl px-8 rounded-[2rem] shadow-2xl`}>
                <div className="space-y-6">
                   {/* Top Row - Product Types */}
-                  <div className="flex justify-center">
-                     <div className="flex gap-3 p-2 rounded-full border border-current/10 bg-current/5">
+                  <div className="flex justify-center w-full">
+                     {/* Desktop View */}
+                     <div className="hidden md:flex gap-3 p-2 rounded-full border border-current/10 bg-current/5">
                         {(['All', 'Candle', 'Perfume', 'Diffuser'] as const).map(type => (
                            <button
                               key={type}
                               onClick={() => { setActiveType(type); setPriceFilter('all'); }}
                               className={`px-8 py-3 rounded-full text-[9px] uppercase tracking-[0.5em] font-bold transition-all ${activeType === type ? (isDark ? 'bg-amber-600 text-black shadow-xl shadow-amber-600/20' : 'bg-stone-900 text-white shadow-xl shadow-black/20') : 'opacity-40 hover:opacity-100'}`}
                            >
-                              {type}s
+                              {type}{type !== 'All' && 's'}
                            </button>
                         ))}
+                     </div>
+                     {/* Mobile View Dropdown */}
+                     <div className="md:hidden w-full relative">
+                        <select
+                           value={activeType}
+                           onChange={(e) => { setActiveType(e.target.value as any); setPriceFilter('all'); }}
+                           className={`w-full px-6 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-bold border appearance-none transition-all cursor-pointer ${isDark ? 'bg-[#1a1a1a] border-white/20 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500' : 'bg-white border-black/20 text-stone-900 focus:border-amber-600 focus:ring-1 focus:ring-amber-600'} outline-none`}
+                        >
+                           {(['All', 'Candle', 'Perfume', 'Diffuser'] as const).map(type => (
+                              <option key={type} value={type} className={isDark ? 'bg-[#1a1a1a] text-white' : 'bg-white text-black'}>
+                                 {type}{type !== 'All' && 's'}
+                              </option>
+                           ))}
+                        </select>
+                        <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 opacity-50 pointer-events-none" />
                      </div>
                   </div>
 
                   {/* Bottom Row - Price Filter & Search */}
                   <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
                      {/* Price Filter */}
-                     <div className="flex items-center gap-6">
-                        <Filter className="w-4 h-4 opacity-30 flex-shrink-0" />
-                        <div className="flex gap-6">
+                     <div className="flex items-center gap-4 md:gap-6 w-full lg:w-auto overflow-x-auto hide-scrollbar pb-2 lg:pb-0">
+                        <Filter className="w-4 h-4 opacity-30 flex-shrink-0 hidden md:block" />
+                        <div className="flex gap-4 md:gap-6 w-full lg:w-auto overflow-x-auto hide-scrollbar snap-x">
                            {[
                               { label: 'All Prices', value: 'all' },
                               { label: 'Under ₹99', value: 'low' },
@@ -585,7 +601,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                               <button
                                  key={filter.value}
                                  onClick={() => setPriceFilter(filter.value as any)}
-                                 className={`text-[9px] uppercase tracking-[0.4em] font-bold transition-all relative py-2 whitespace-nowrap ${priceFilter === filter.value ? 'opacity-100' : 'opacity-30 hover:opacity-100'}`}
+                                 className={`text-[9px] uppercase tracking-[0.4em] font-bold transition-all relative py-2 whitespace-nowrap snap-start ${priceFilter === filter.value ? 'opacity-100' : 'opacity-40 hover:opacity-100'}`}
                               >
                                  {filter.label}
                                  {priceFilter === filter.value && <motion.span layoutId="activePriceFilter" className="absolute bottom-0 left-0 w-full h-[1px] bg-amber-500" />}
@@ -595,7 +611,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                      </div>
 
                      {/* Search Bar */}
-                     <div className={`flex items-center gap-4 px-6 py-3 rounded-full border ${isDark ? 'border-white/20 bg-white/10' : 'border-black/20 bg-black/10'} min-w-[280px] shadow-lg`}>
+                     <div className={`flex items-center gap-4 px-6 py-3 rounded-full border w-full lg:w-auto ${isDark ? 'border-white/20 bg-white/10' : 'border-black/20 bg-black/10'} lg:min-w-[280px] shadow-lg`}>
                         <Search className="w-4 h-4 opacity-40" />
                         <input
                            type="text"
@@ -654,7 +670,8 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="group"
+                        className="group cursor-pointer"
+                        onClick={() => setSelectedProduct(product)}
                      >
                         <div className={`aspect-[4/5] rounded-[3.5rem] overflow-hidden relative shadow-2xl transition-all duration-700 ${isDark ? 'bg-stone-900 border border-white/5' : 'bg-white border border-black/5'}`}>
                            {product.images && product.images.length > 1 ? (
@@ -681,13 +698,16 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                                  <p className="text-sm font-light text-white/70 italic leading-relaxed line-clamp-3">{product.description}</p>
                                  <div className="flex gap-4">
                                     <button
-                                       onClick={() => setSelectedProduct(product)}
+                                       onClick={(e) => { e.stopPropagation(); setSelectedProduct(product); }}
                                        className="flex-1 py-4 rounded-full bg-white text-black text-[9px] uppercase tracking-widest font-bold hover:bg-amber-500 transition-colors"
                                     >
                                        Quick View
                                     </button>
                                     <button
-                                       onClick={() => product.fragranceOptions && product.fragranceOptions.length > 0 ? setSelectedProduct(product) : onAddToCart(product)}
+                                       onClick={(e) => {
+                                          e.stopPropagation();
+                                          product.fragranceOptions && product.fragranceOptions.length > 0 ? setSelectedProduct(product) : onAddToCart(product);
+                                       }}
                                        className="p-4 rounded-full border border-white/20 text-white hover:bg-amber-600 hover:border-amber-600 transition-all"
                                     >
                                        <ShoppingBag className="w-5 h-5" />
