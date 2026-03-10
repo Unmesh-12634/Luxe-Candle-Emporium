@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShoppingBag, X, Plus, Minus, Trash2 } from 'lucide-react';
+import { ShoppingBag, X, Plus, Minus, Trash2, Edit3 } from 'lucide-react';
 import logoAsset from 'figma:asset/2d1a7c1e0e0ba214033ec10afd82a134f3bad7c3.png';
 
 export interface CartItem {
@@ -9,6 +9,8 @@ export interface CartItem {
   price: number;
   image: string;
   quantity: number;
+  selectedFragrance?: string;
+  customNote?: string;
 }
 
 interface CartProps {
@@ -21,11 +23,11 @@ interface CartProps {
   theme?: 'dark' | 'light';
 }
 
-export const Cart: React.FC<CartProps> = ({ 
-  isOpen, 
-  onClose, 
-  items, 
-  onUpdateQuantity, 
+export const Cart: React.FC<CartProps> = ({
+  isOpen,
+  onClose,
+  items,
+  onUpdateQuantity,
   onRemove,
   onCheckout,
   theme,
@@ -60,8 +62,8 @@ export const Cart: React.FC<CartProps> = ({
               <p className="text-[8px] uppercase tracking-[0.4em] opacity-40 font-bold">Refining atmosphere</p>
             </div>
           </div>
-          <button 
-            onClick={onClose} 
+          <button
+            onClick={onClose}
             className="p-4 border border-white/10 rounded-full transition-all hover:bg-white/5 group active:scale-90"
           >
             <X className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
@@ -76,7 +78,7 @@ export const Cart: React.FC<CartProps> = ({
                 <ShoppingBag className="w-16 h-16 stroke-[0.5px] relative" />
               </div>
               <p className="text-[10px] uppercase tracking-[0.6em] font-bold italic">The archive is silent</p>
-              <button 
+              <button
                 onClick={onClose}
                 className="text-[9px] uppercase tracking-[0.4em] text-amber-500 border-b border-amber-500/20 pb-1"
               >
@@ -85,12 +87,12 @@ export const Cart: React.FC<CartProps> = ({
             </div>
           ) : (
             items.map((item) => (
-              <motion.div 
+              <motion.div
                 layout
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                key={item.id} 
+                key={item.id}
                 className="flex gap-8 group"
               >
                 <div className="w-24 h-32 rounded-3xl overflow-hidden flex-shrink-0 shadow-2xl bg-stone-900 border border-white/10">
@@ -100,7 +102,24 @@ export const Cart: React.FC<CartProps> = ({
                   <div className="flex justify-between items-start">
                     <div className="space-y-1">
                       <h3 className="font-serif italic text-2xl tracking-tighter text-white">{item.name}</h3>
-                      <p className="text-[9px] uppercase tracking-[0.4em] opacity-40 italic">Signature Batch No. 02</p>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-[9px] uppercase tracking-[0.4em] opacity-40 italic">Signature Batch No. 02</p>
+                        {item.selectedFragrance && (
+                          <p className="text-[10px] text-amber-500/80 font-serif italic">Scent: {item.selectedFragrance}</p>
+                        )}
+                        {item.customNote && (
+                          <div className="mt-4 p-4 rounded-[2rem] bg-white/[0.03] border border-white/5 relative group/note">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Edit3 className="w-2.5 h-2.5 text-amber-500/50" />
+                              <p className="text-[7px] uppercase tracking-[0.3em] opacity-40 font-black">Bespoke Request</p>
+                            </div>
+                            <p className="text-[11px] leading-relaxed opacity-70 font-serif italic break-words pr-4">
+                              "{item.customNote}"
+                            </p>
+                            <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-amber-500/20" />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between pt-2">
@@ -114,10 +133,10 @@ export const Cart: React.FC<CartProps> = ({
                       </button>
                     </div>
                     <div className="flex items-end flex-col">
-                       <p className="font-serif text-xl text-amber-500">${item.price}</p>
-                       <button onClick={() => onRemove(item.id)} className="opacity-50 hover:opacity-100 text-red-400 hover:text-red-500 transition-all p-2 mt-1">
-                         <Trash2 className="w-4 h-4" />
-                       </button>
+                      <p className="font-serif text-xl text-amber-500">${item.price}</p>
+                      <button onClick={() => onRemove(item.id)} className="opacity-50 hover:opacity-100 text-red-400 hover:text-red-500 transition-all p-2 mt-1">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -137,19 +156,19 @@ export const Cart: React.FC<CartProps> = ({
               <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-amber-500 italic">Complimentary</span>
             </div>
           </div>
-          
-          <button 
+
+          <button
             disabled={items.length === 0}
             onClick={onCheckout}
             className={`w-full py-6 rounded-full font-bold text-[10px] uppercase tracking-[0.5em] transition-all shadow-2xl ${isDark ? 'bg-amber-600 text-black hover:bg-amber-500' : 'bg-stone-900 text-white hover:bg-black'}`}
           >
             Order Now
           </button>
-          
+
           <div className="flex items-center justify-center gap-6 opacity-[0.08]">
-             <span className="w-16 h-[0.5px] bg-white" />
-             <p className="text-[8px] uppercase tracking-[0.8em] font-black">Lux Emporium Studio</p>
-             <span className="w-16 h-[0.5px] bg-white" />
+            <span className="w-16 h-[0.5px] bg-white" />
+            <p className="text-[8px] uppercase tracking-[0.8em] font-black">Lux Emporium Studio</p>
+            <span className="w-16 h-[0.5px] bg-white" />
           </div>
         </div>
       </motion.div>

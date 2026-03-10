@@ -7,6 +7,7 @@ import { Cart } from './components/Cart';
 import { Toast } from './components/Toast';
 import { Gifting } from './components/Gifting';
 import { FragranceBar } from './components/FragranceBar';
+import { Journal } from './components/Journal';
 import { Preloader } from './components/Preloader';
 import {
   ShoppingBag,
@@ -47,6 +48,7 @@ import icedLatte1 from 'figma:asset/33d57ddd7902a4a440a31a1425f590f82a204559.png
 import daisyBouquet1 from 'figma:asset/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
 import champagneCandle1 from 'figma:asset/65d14f9ea7c1b190df62615226b294245836027b.png';
 import peonyCandle from 'figma:asset/7d9d780091fbbe3c8de325444dbfe13bbbffd8ae.png';
+import ladduCandle1 from 'figma:asset/51c28d9bee12628c01b14baa77c24ebc63efc910.png';
 
 // Hero section images
 import heroCandleAsset from 'figma:asset/c0165306a09493da6520a8dfc5d4217a7ecfc03b.png';
@@ -67,7 +69,8 @@ interface CartItem {
   price: number;
   image: string;
   quantity: number;
-  fragrance?: string;
+  selectedFragrance?: string;
+  customNote?: string;
 }
 
 interface Product {
@@ -75,6 +78,8 @@ interface Product {
   name: string;
   price: number;
   image: string;
+  selectedFragrance?: string;
+  customNote?: string;
 }
 
 // Static Data
@@ -143,21 +148,32 @@ export default function App() {
 
   const addToCart = (product: Product) => {
     setCartItems(prev => {
-      const existing = prev.find(item => item.id === product.id);
+      const existing = prev.find(item =>
+        item.id === product.id &&
+        item.selectedFragrance === product.selectedFragrance &&
+        item.customNote === product.customNote
+      );
+
       if (existing) {
-        setToastMessage(`${product.name} added to cart!`);
+        setToastMessage(`${product.name} quantity updated!`);
         setToastType('success');
         setShowToast(true);
         setTimeout(() => setShowToast(false), 3000);
-        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+        return prev.map(item =>
+          (item.id === product.id &&
+            item.selectedFragrance === product.selectedFragrance &&
+            item.customNote === product.customNote)
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
       }
-      setToastMessage(`${product.name} added to cart!`);
+
+      setToastMessage(`${product.name} added to sanctuary!`);
       setToastType('success');
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
       return [...prev, { ...product, quantity: 1 }];
     });
-    // Removed setCartOpen(true) to not open automatically
   };
 
   const isDark = theme === 'dark';
@@ -191,7 +207,6 @@ export default function App() {
                 {[
                   { name: 'Bestsellers', view: 'bestsellers' },
                   { name: 'Gifting', view: 'gifting' },
-                  { name: 'Fragrance Bar', view: 'fragranceBar' },
                   { name: 'Shop All', view: 'store' }
                 ].map((item) => (
                   <button
@@ -274,8 +289,7 @@ export default function App() {
                   {[
                     { label: 'Bestsellers', view: 'bestsellers', sub: 'Top selling candles', num: '01' },
                     { label: 'Gifting', view: 'gifting', sub: 'Curated gift sets', num: '02' },
-                    { label: 'Fragrance Bar', view: 'fragranceBar', sub: 'Signature scents', num: '03' },
-                    { label: 'Shop All', view: 'store', sub: 'Complete collection', num: '04' }
+                    { label: 'Shop All', view: 'store', sub: 'Complete collection', num: '03' }
                   ].map((item, i) => (
                     <motion.div
                       key={item.label}
@@ -516,7 +530,7 @@ export default function App() {
                     { img: icedLatte1, name: 'Iced Latte Candle', delay: 0.3 },
                     { img: daisyBouquet1, name: 'Daisy Bouquet', delay: 0.4 },
                     { img: champagneCandle1, name: 'Champagne Candle', delay: 0.5 },
-                    { img: flowerBouquet1, name: 'Flower Bouquet', delay: 0.6 },
+                    { img: ladduCandle1, name: 'Laddu Candle', delay: 0.6 },
                     { img: knotBouquet1, name: 'Knot Bouquet', delay: 0.7 }
                   ].map((candle, i) => (
                     <motion.div
@@ -662,12 +676,9 @@ export default function App() {
           <Gifting key="gifting" theme={theme} onAddToCart={addToCart} />
         )}
 
-        {view === 'fragranceBar' && (
-          <FragranceBar key="fragranceBar" theme={theme} />
-        )}
 
         {view === 'journal' && (
-          <OrderConfirmation theme={theme} />
+          <Journal theme={theme} />
         )}
 
         {view === 'studio' && (
@@ -784,7 +795,7 @@ export default function App() {
                 <p className="text-[10px] uppercase tracking-[0.5em] text-amber-500 font-bold">Concierge Service</p>
                 <div className="space-y-3 flex flex-col">
                   <a href="tel:+916375821299" className="text-sm font-serif italic opacity-60 hover:opacity-100 hover:text-amber-500 transition-all w-fit">+91 6375 821 299</a>
-                  <a href="mailto:luxe@emporium.com" className="text-sm font-serif italic opacity-60 hover:opacity-100 hover:text-amber-500 transition-all w-fit">luxe@emporium.com</a>
+                  <a href="mailto:luxecandlese@gmail.com" className="text-sm font-serif italic opacity-60 hover:opacity-100 hover:text-amber-500 transition-all w-fit">luxecandlese@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -831,10 +842,10 @@ export default function App() {
           {/* Bottom Footer */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-6">
-              <a href="https://instagram.com/luxecandleemporium" target="_blank" rel="noreferrer" aria-label="Instagram" className="group p-3 rounded-full bg-white/5 hover:bg-amber-500/10 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
+              <a href="https://instagram.com/luxe_candles_emporium" target="_blank" rel="noreferrer" aria-label="Instagram" className="group p-3 rounded-full bg-white/5 hover:bg-amber-500/10 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
                 <Instagram className="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:text-amber-500 transition-colors" />
               </a>
-              <a href="mailto:luxe@emporium.com" aria-label="Email" className="group p-3 rounded-full bg-white/5 hover:bg-amber-500/10 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
+              <a href="mailto:luxecandlese@gmail.com" aria-label="Email" className="group p-3 rounded-full bg-white/5 hover:bg-amber-500/10 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
                 <Mail className="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:text-amber-500 transition-colors" />
               </a>
               <a href="https://twitter.com/luxecandle" target="_blank" rel="noreferrer" aria-label="Twitter" className="group p-3 rounded-full bg-white/5 hover:bg-amber-500/10 border border-white/5 hover:border-amber-500/30 transition-all duration-500">

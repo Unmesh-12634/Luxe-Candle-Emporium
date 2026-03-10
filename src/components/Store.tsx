@@ -13,7 +13,8 @@ import {
    Zap,
    ChevronDown,
    LayoutGrid,
-   Tally3
+   Tally3,
+   MessageSquare
 } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ProductImageCarousel } from './ProductImageCarousel';
@@ -80,7 +81,7 @@ interface Product {
 const PRODUCTS: Product[] = [
    // 1. BUBBLE CANDLES
    {
-      id: 'c0',
+      id: 'bubble-candle',
       name: 'Bubble Candle',
       price: 159,
       currency: '₹',
@@ -96,26 +97,26 @@ const PRODUCTS: Product[] = [
       description: 'Handcrafted bubble candles in stunning pastel hues. Each candle is a unique work of art featuring a mesmerizing bubble texture. Available in multiple colors and fragrances to suit your mood.',
       featured: true
    },
-   // 2. PEONY BOUQUET CANDLE
+   // 2. PEONY CANDLE
    {
-      id: 'c00',
-      name: 'Peony Bouquet Candle',
+      id: 'peony-candle',
+      name: 'Peony Candle',
       price: 199,
       currency: '₹',
       image: peonyCandle,
-      images: [peonyCandle], // Multiple views
+      images: [peonyCandle], // Single photo as requested
       type: 'Candle',
       category: 'Artisan',
       scent: 'Rose, Lavender, Jasmine',
       notes: ['Rose', 'Lavender', 'Jasmine'],
       mood: 'Romantic & Elegant',
-      details: '40 Hours',
+      details: 'Artisan Crafted',
       description: 'Beautiful peony-shaped candle with a delicate blend of rose, lavender, and jasmine. Handcrafted with premium soy wax for a clean, long-lasting burn.',
       featured: true
    },
    // 3. LUXURIOUS JAR CANDLE
    {
-      id: 'c000',
+      id: 'jar-candle',
       name: 'Luxurious Jar Candle',
       price: 199,
       currency: '₹',
@@ -131,7 +132,7 @@ const PRODUCTS: Product[] = [
    },
    // 4. COUPLE CANDLES
    {
-      id: 'c0000',
+      id: 'couple-candle',
       name: 'Couple Candle',
       price: 199,
       currency: '₹',
@@ -148,7 +149,7 @@ const PRODUCTS: Product[] = [
    },
    // 5. KNOT BOUQUET CANDLE
    {
-      id: 'c000000',
+      id: 'knot-bouquet',
       name: 'Knot Bouquet Candle',
       price: 249,
       currency: '₹',
@@ -160,14 +161,14 @@ const PRODUCTS: Product[] = [
       notes: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
       fragranceOptions: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
       mood: 'Romantic & Luxurious',
-      details: '45 Hours',
-      description: 'An exquisite rose bouquet candle featuring intricately sculpted blooms tied with an elegant ribbon bow. Each petal is hand-carved with exceptional detail. Perfect for special occasions, weddings, or as a luxurious gift. Choose your favorite fragrance.',
+      details: 'Artisan Crafted',
+      description: 'An exquisite rose bouquet candle featuring intricately sculpted blooms with a handcrafted wax knot. Perfect for special occasions, weddings, or as a luxurious gift. Choose your favorite fragrance.',
       featured: true
    },
    // 6. DAISY CANDLE
    {
-      id: 'c0000000',
-      name: 'Daisy Candle',
+      id: 'daisy-pack',
+      name: 'Daisy candle (Pack of 2)',
       price: 60,
       currency: '₹',
       image: daisyCandle1,
@@ -183,7 +184,7 @@ const PRODUCTS: Product[] = [
    },
    // 7. MINI BUBBLE CANDLES
    {
-      id: 'c00000000',
+      id: 'mini-bubble',
       name: 'Mini Bubble Candle',
       price: 49,
       currency: '₹',
@@ -200,7 +201,7 @@ const PRODUCTS: Product[] = [
    },
    // 8. CUSTOMISED JAR CANDLE
    {
-      id: 'c000000000',
+      id: 'custom-jar',
       name: 'Customised Jar Candle',
       price: 199,
       currency: '₹',
@@ -218,9 +219,9 @@ const PRODUCTS: Product[] = [
    },
    // 9. OCEAN CANDLE
    {
-      id: 'c0000000001',
+      id: 'ocean-candle',
       name: 'Ocean Candle',
-      price: 159,
+      price: 199,
       currency: '₹',
       image: oceanCandle1,
       images: [oceanCandle1, oceanCandle2], // Multiple views
@@ -230,13 +231,13 @@ const PRODUCTS: Product[] = [
       notes: ['Sandalwood', 'Rose', 'Lavender'],
       fragranceOptions: ['Sandalwood', 'Rose', 'Lavender'],
       mood: 'Coastal & Tranquil',
-      details: '45 Hours',
+      details: 'Gel Artistry',
       description: 'Mesmerizing ocean-inspired gel candles featuring layers of sparkling blue gel resembling tropical waters, adorned with real seashells, starfish, and natural sand. Each candle captures the serene beauty of the seaside. Available in 3 soothing fragrances to transport you to a peaceful beach paradise.',
       featured: false
    },
    // 10. ICED LATTE CANDLE
    {
-      id: 'c00000000000',
+      id: 'iced-latte',
       name: 'Iced Latte Candle',
       price: 299,
       currency: '₹',
@@ -254,7 +255,7 @@ const PRODUCTS: Product[] = [
    },
    // 11. LADDU CANDLE
    {
-      id: 'c000000000000',
+      id: 'laddu-candle',
       name: 'Laddu Candle',
       price: 59,
       currency: '₹',
@@ -271,7 +272,7 @@ const PRODUCTS: Product[] = [
    },
    // 12. MODAK CANDLE
    {
-      id: 'c0000000000000',
+      id: 'modak-candle',
       name: 'Modak Candle',
       price: 59,
       currency: '₹',
@@ -284,30 +285,48 @@ const PRODUCTS: Product[] = [
       fragranceOptions: ['Sandalwood', 'Kesar'],
       mood: 'Festive & Traditional',
       details: 'Pack of 2',
-      description: 'Exquisite modak-shaped candles handcrafted to perfection with creamy ivory wax adorned with delicate gold leaf accents. Inspired by Lord Ganesha\'s favorite sweet, these elegant candles feature beautifully detailed pleats. Perfect for festivals, puja ceremonies, and celebrations. Available in 2 divine fragrances: rich sandalwood and precious kesar (saffron).',
+      description: 'Exquisite modak-shaped candles handcrafted to perfection with creamy ivory wax adorned with delicate gold leaf accents. Inspired by Lord Ganesha\'s favorite sweet, these elegant candles are perfect for festivals, puja ceremonies, and celebrations. Available in 2 divine fragrances: rich sandalwood and precious kesar (saffron).',
       featured: false
    },
    // 13. DAISY BOUQUET CANDLE
    {
-      id: 'c00000000000001',
+      id: 'daisy-bouquet',
       name: 'Daisy Bouquet Candle',
-      price: 59,
+      price: 249,
       currency: '₹',
       image: daisyBouquet1,
-      images: [daisyBouquet1, daisyBouquet2, daisyBouquet3, daisyBouquet4], // Multiple views
+      images: [daisyBouquet1, daisyBouquet2], // Purely Daisy
       type: 'Candle',
       category: 'Artisan',
-      scent: 'Multiple Options Available',
-      notes: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
+      scent: 'Fresh Florals',
+      notes: ['Daisy', 'Wildflower', 'Green Stem'],
       fragranceOptions: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
-      mood: 'Cheerful & Romantic',
-      details: '30 Hours',
-      description: 'Stunning daisy bouquet candles featuring vibrant, handcrafted blooms wrapped in elegant kraft paper cones with delicate ribbon bows. Each bouquet showcases beautifully detailed petals in a rainbow of colors - from soft pinks and blues to vibrant yellows and purples. Perfect for gifting, celebrations, or adding a cheerful pop of color to any space. Choose from 4 enchanting fragrances.',
+      mood: 'Cheerful & Bright',
+      details: 'Artisan Bouquet',
+      description: 'Stunning daisy bouquet candles featuring vibrant, handcrafted blooms wrapped in elegant cones. Each bouquet showcases beautifully detailed daisy petals in cheerful colors.',
       featured: false
+   },
+   // 13b. PEONY BOUQUET CANDLE
+   {
+      id: 'peony-bouquet',
+      name: 'Peony Bouquet Candle',
+      price: 299,
+      currency: '₹',
+      image: flowerBouquet1,
+      images: [flowerBouquet1, flowerBouquet2, daisyBouquet3, daisyBouquet4],
+      type: 'Candle',
+      category: 'Artisan',
+      scent: 'Rich Peony',
+      notes: ['Peony', 'Damask Rose', 'White Musk'],
+      fragranceOptions: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
+      mood: 'Romantic & Royal',
+      details: 'Artisan Bouquet',
+      description: 'Exquisite peony bouquet candles featuring lush, full blooms wrapped with luxury artisan precision. Perfect for grand gestures and premium gifting.',
+      featured: true
    },
    // 14. GLASS CANDLES
    {
-      id: 'c00000000000002',
+      id: 'glass-candle',
       name: 'Glass Candle',
       price: 59,
       currency: '₹',
@@ -319,13 +338,13 @@ const PRODUCTS: Product[] = [
       notes: ['Rose', 'Jasmine', 'Lavender'],
       fragranceOptions: ['Rose', 'Jasmine', 'Lavender'],
       mood: 'Elegant & Serene',
-      details: '25 Hours',
-      description: 'Elegant glass candles in clear holders featuring soft pastel wax in soothing shades of pink, lavender, and mint green. Each candle is hand-poured with a smooth, velvety finish. Perfect for creating a calm, minimalist ambiance in any space. Available in 3 beautiful fragrances.',
+      details: 'Atmospheric',
+      description: 'Elegant glass candles in clear holders featuring soft pastel wax in soothing shades. Each candle is hand-poured with a smooth, velvety finish. Perfect for creating a calm, minimalist ambiance in any space. Available in 3 beautiful fragrances.',
       featured: false
    },
    // 15. CHAMPAGNE CANDLES
    {
-      id: 'c00000000000003',
+      id: 'champagne-candle',
       name: 'Champagne Candle',
       price: 299,
       currency: '₹',
@@ -384,6 +403,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
    const [searchQuery, setSearchQuery] = useState('');
    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
    const [selectedFragrance, setSelectedFragrance] = useState<string>('');
+   const [customNote, setCustomNote] = useState<string>('');
 
    const isDark = theme === 'dark';
 
@@ -490,31 +510,58 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                                     </div>
                                  )}
 
+                                 <div className={`p-8 rounded-[2.5rem] space-y-6 transition-all duration-500 border ${isDark ? 'bg-white/[0.02] border-white/5 hover:border-amber-500/30' : 'bg-black/[0.02] border-black/5 hover:border-amber-600/30'}`}>
+                                    <div className="flex items-center gap-4">
+                                       <div className={`p-3 rounded-full ${isDark ? 'bg-white/5' : 'bg-black/5'}`}>
+                                          <MessageSquare className="w-4 h-4 text-amber-500" />
+                                       </div>
+                                       <div>
+                                          <p className="text-[10px] uppercase tracking-[0.4em] font-bold opacity-40">Personalization Atelier</p>
+                                          <p className="text-sm font-serif italic opacity-80">Add your bespoke instructions</p>
+                                       </div>
+                                    </div>
+
+                                    <textarea
+                                       value={customNote}
+                                       onChange={(e) => setCustomNote(e.target.value)}
+                                       placeholder="e.g., Mention specific colors, packaging preferences, or a short gift message..."
+                                       className={`w-full px-6 py-5 rounded-3xl text-sm font-serif italic border transition-all resize-none h-32 ${isDark ? 'bg-black/40 border-white/10 text-white focus:border-amber-500/50' : 'bg-white/40 border-black/10 text-stone-900 focus:border-amber-600/50'} focus:outline-none focus:ring-1 focus:ring-amber-500/20 placeholder:opacity-30`}
+                                    />
+
+                                    <div className="flex justify-between items-center px-2">
+                                       <p className="text-[8px] uppercase tracking-widest opacity-30 font-bold">Bespoke Request</p>
+                                       <p className={`text-[8px] uppercase tracking-widest font-bold ${customNote.length > 500 ? 'text-red-500' : 'opacity-30'}`}>{customNote.length} / 500</p>
+                                    </div>
+                                 </div>
+
                                  <div className="grid grid-cols-2 gap-8">
                                     <div className="space-y-2">
                                        <p className="text-[9px] uppercase tracking-[0.4em] font-bold opacity-40">Profile</p>
                                        <p className="text-xl font-serif italic">{selectedProduct.scent}</p>
                                     </div>
                                     <div className="space-y-2">
-                                       <p className="text-[9px] uppercase tracking-[0.4em] font-bold opacity-40">{selectedProduct.type === 'Candle' ? 'Burn Time' : 'Volume'}</p>
+                                       <p className="text-[9px] uppercase tracking-[0.4em] font-bold opacity-40">{selectedProduct.type === 'Candle' ? 'Collection' : 'Volume'}</p>
                                        <p className="text-xl font-serif italic">{selectedProduct.details}</p>
                                     </div>
                                  </div>
                                  <button
                                     onClick={() => {
-                                       const productWithFragrance = selectedProduct.fragranceOptions
-                                          ? { ...selectedProduct, selectedFragrance }
-                                          : selectedProduct;
-                                       onAddToCart(productWithFragrance);
+                                       const productWithDetails = {
+                                          ...selectedProduct,
+                                          selectedFragrance,
+                                          customNote: customNote.trim()
+                                       };
+                                       onAddToCart(productWithDetails);
                                        setSelectedProduct(null);
                                        setSelectedFragrance('');
+                                       setCustomNote('');
                                     }}
                                     disabled={selectedProduct.fragranceOptions && selectedProduct.fragranceOptions.length > 0 && !selectedFragrance}
                                     className={`w-full py-6 rounded-full font-bold text-[10px] uppercase tracking-[0.5em] transition-all flex items-center justify-center gap-4 ${selectedProduct.fragranceOptions && selectedProduct.fragranceOptions.length > 0 && !selectedFragrance
-                                          ? 'opacity-40 cursor-not-allowed bg-gray-500'
-                                          : isDark
-                                             ? 'bg-amber-600 text-black hover:bg-amber-500'
-                                             : 'bg-stone-900 text-white hover:bg-black'
+                                       ? 'opacity-40 cursor-not-allowed bg-gray-500'
+                                       : isDark
+                                          ? 'bg-amber-600 text-black hover:bg-amber-500'
+                                          : 'bg-stone-900 text-white hover:bg-black'
                                        }`}
                                  >
                                     {selectedProduct.fragranceOptions && selectedProduct.fragranceOptions.length > 0 && !selectedFragrance
@@ -733,7 +780,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                                     <span className="text-[9px] uppercase tracking-widest">{product.scent}</span>
                                  </div>
                                  <div className="w-1 h-1 rounded-full bg-current" />
-                                 <span className="text-[9px] uppercase tracking-widest">{product.details}</span>
+                                 <span className="text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-40 transition-opacity whitespace-nowrap">{product.details}</span>
                               </div>
                            </div>
                            <p className={`text-2xl font-serif ${isDark ? 'text-amber-500' : 'text-stone-800'}`}>{product.currency ? product.currency : '$'}{product.price}</p>

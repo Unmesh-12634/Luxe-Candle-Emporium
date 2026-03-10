@@ -10,10 +10,10 @@ interface ProductImageCarouselProps {
   className?: string;
 }
 
-export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({ 
-  images, 
-  productName, 
-  autoPlayInterval = 12000,
+export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
+  images,
+  productName,
+  autoPlayInterval = 5000,
   className = ''
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,7 +48,7 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
   if (images.length === 0) return null;
 
   return (
-    <div 
+    <div
       className={`relative w-full h-full group ${className}`}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -61,10 +61,10 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.02 }}
-            transition={{ 
-              duration: 1.8, 
+            transition={{
+              duration: 1.0,
               ease: [0.19, 1.0, 0.22, 1.0],
-              opacity: { duration: 1.5 }
+              opacity: { duration: 0.8 }
             }}
             className="absolute inset-0"
           >
@@ -105,11 +105,10 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
             <button
               key={index}
               onClick={(e) => goToSlide(index, e)}
-              className={`transition-all duration-300 rounded-full ${
-                index === currentIndex
+              className={`transition-all duration-300 rounded-full ${index === currentIndex
                   ? 'w-8 h-2 bg-amber-500'
                   : 'w-2 h-2 bg-white/40 hover:bg-white/60'
-              }`}
+                }`}
               aria-label={`Go to image ${index + 1}`}
             />
           ))}
