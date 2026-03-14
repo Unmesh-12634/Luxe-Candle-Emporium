@@ -71,6 +71,11 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ isOpen, on
   };
 
   const handleClose = () => {
+    if (step === 'confirmed') {
+      onConfirmOrder();
+    } else {
+      onClose();
+    }
     setStep('payment');
     setFormData({
       name: '',
@@ -80,7 +85,6 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ isOpen, on
       cardNumber: '',
       upiId: ''
     });
-    onClose();
   };
 
   return (

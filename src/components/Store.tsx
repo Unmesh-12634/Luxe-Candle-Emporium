@@ -50,15 +50,16 @@ import ladduCandle3 from 'figma:asset/6003baa7a3b1a43dd9db8170d7baf393c6cb9f14.p
 import modakCandle1 from 'figma:asset/cd6f8e3b7d04a1388aaaa5a6cffdf6ecb624f0e8.png';
 import modakCandle2 from 'figma:asset/924bd063118706d79b73b8606a042f92971ae51e.png';
 import modakCandle3 from 'figma:asset/3e7c89280fe3c24afb922c7c00789ee36b507804.png';
-import daisyBouquet1 from 'figma:asset/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
-import daisyBouquet2 from 'figma:asset/9872342658f04146f1c934178e2d1096e1f4b997.png';
-import daisyBouquet3 from 'figma:asset/32068fcffff9a8c23315136d41f2b6526232b476.png';
-import daisyBouquet4 from 'figma:asset/d59c09bddf1ee66ed3fb5c80a0e716e5123a9d3a.png';
 import glassCandle1 from 'figma:asset/e39d5e2513fc99de611810e00f7f442b59da054e.png';
 import glassCandle2 from 'figma:asset/05cdbb1e4ae059ef9c7f8a6863ba0f15b015f935.png';
 import glassCandle3 from 'figma:asset/5dd7426353115f7d22f7e720d0be4e0cc6b9f8bd.png';
 import champagneCandle1 from 'figma:asset/65d14f9ea7c1b190df62615226b294245836027b.png';
 import champagneCandle2 from 'figma:asset/9a11f379f0a341ab41fc4ec208b6bf0beda88c70.png';
+import peonyBouquet1 from '../assets/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
+import peonyBouquet2 from '../assets/9872342658f04146f1c934178e2d1096e1f4b997.png';
+import daisyBouquet1 from '../assets/32068fcffff9a8c23315136d41f2b6526232b476.png';
+import daisyBouquet2 from '../assets/d59c09bddf1ee66ed3fb5c80a0e716e5123a9d3a.png';
+import daisyBouquet3 from '../assets/daisy_bouquet_1.png';
 
 interface Product {
    id: string;
@@ -288,42 +289,6 @@ const PRODUCTS: Product[] = [
       description: 'Exquisite modak-shaped candles handcrafted to perfection with creamy ivory wax adorned with delicate gold leaf accents. Inspired by Lord Ganesha\'s favorite sweet, these elegant candles are perfect for festivals, puja ceremonies, and celebrations. Available in 2 divine fragrances: rich sandalwood and precious kesar (saffron).',
       featured: false
    },
-   // 13. DAISY BOUQUET CANDLE
-   {
-      id: 'daisy-bouquet',
-      name: 'Daisy Bouquet Candle',
-      price: 249,
-      currency: '₹',
-      image: daisyBouquet1,
-      images: [daisyBouquet1, daisyBouquet2], // Purely Daisy
-      type: 'Candle',
-      category: 'Artisan',
-      scent: 'Fresh Florals',
-      notes: ['Daisy', 'Wildflower', 'Green Stem'],
-      fragranceOptions: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
-      mood: 'Cheerful & Bright',
-      details: 'Artisan Bouquet',
-      description: 'Stunning daisy bouquet candles featuring vibrant, handcrafted blooms wrapped in elegant cones. Each bouquet showcases beautifully detailed daisy petals in cheerful colors.',
-      featured: false
-   },
-   // 13b. PEONY BOUQUET CANDLE
-   {
-      id: 'peony-bouquet',
-      name: 'Peony Bouquet Candle',
-      price: 299,
-      currency: '₹',
-      image: flowerBouquet1,
-      images: [flowerBouquet1, flowerBouquet2, daisyBouquet3, daisyBouquet4],
-      type: 'Candle',
-      category: 'Artisan',
-      scent: 'Rich Peony',
-      notes: ['Peony', 'Damask Rose', 'White Musk'],
-      fragranceOptions: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
-      mood: 'Romantic & Royal',
-      details: 'Artisan Bouquet',
-      description: 'Exquisite peony bouquet candles featuring lush, full blooms wrapped with luxury artisan precision. Perfect for grand gestures and premium gifting.',
-      featured: true
-   },
    // 14. GLASS CANDLES
    {
       id: 'glass-candle',
@@ -352,12 +317,47 @@ const PRODUCTS: Product[] = [
       images: [champagneCandle1, champagneCandle2], // Multiple views
       type: 'Candle',
       category: 'Artisan',
-      scent: 'Multiple Options Available',
-      notes: ['Strawberry', 'Vanilla'],
-      fragranceOptions: ['Strawberry', 'Vanilla'],
-      mood: 'Celebratory & Luxurious',
-      details: '30 Hours',
-      description: 'Exquisite champagne flute candles featuring sparkling pink gel wax that mimics the effervescence of fine champagne, topped with fresh strawberries. Served in elegant champagne glasses with realistic bubble effects. Perfect for celebrations, romantic dinners, and special occasions. Available in 2 delightful fragrances.',
+      scent: 'Champagne & Berries',
+      notes: ['Champagne', 'Berries', 'Sweet Vanilla'],
+      mood: 'Celebratory & Sophisticated',
+      details: 'Luxury Glass',
+      description: 'Elegant champagne-inspired candles that add a touch of sophistication to any celebration. Infused with the sparkling scent of champagne and sweet berries. Perfect for special occasions and as a premium gift.',
+      featured: false
+   },
+   // 16. PEONY BOUQUET CANDLE
+   {
+      id: 'peony-bouquet',
+      name: 'Peony Bouquet Candle',
+      price: 199,
+      currency: '₹',
+      image: peonyBouquet1,
+      images: [peonyBouquet1, peonyBouquet2],
+      type: 'Candle',
+      category: 'Floral Bouquets',
+      scent: 'Rose, Lavender, Jasmine',
+      notes: ['Rose', 'Lavender', 'Jasmine'],
+      fragranceOptions: ['Rose', 'Lavender', 'Jasmine'],
+      mood: 'Romantic & Floral',
+      details: 'Floral Artistry',
+      description: 'A stunning, handcrafted Peony bouquet candle that captures the timeless beauty of fresh flowers. Expertly detailed with delicate petals and wrapped in elegant packaging, it makes a perfect centerpiece or a luxurious gift. Available in a signature blend of Rose, Lavender, and Jasmine floral fragrances.',
+      featured: true
+   },
+   // 17. DAISY BOUQUET CANDLE
+   {
+      id: 'daisy-bouquet',
+      name: 'Daisy Bouquet Candle',
+      price: 59,
+      currency: '₹',
+      image: daisyBouquet1,
+      images: [daisyBouquet1, daisyBouquet2, daisyBouquet3],
+      type: 'Candle',
+      category: 'Floral Bouquets',
+      scent: 'Rose, Jasmine, Lavender, Vanilla',
+      notes: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
+      fragranceOptions: ['Rose', 'Jasmine', 'Lavender', 'Vanilla'],
+      mood: 'Cheerful & Sweet',
+      details: 'Floral Artistry',
+      description: 'Brighten up any space with our charming Daisy bouquet candle. Hand-poured with precision to resemble a delightful arrangement of daisies, this candle is wrapped in rustic packaging for a touch of natural elegance. Infused with a harmonious blend of Rose, Jasmine, Lavender, and Vanilla.',
       featured: false
    },
    // PERFUMES
@@ -485,7 +485,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                                     <span className="text-[10px] uppercase tracking-[0.6em] font-bold text-amber-500">{selectedProduct.type} / {selectedProduct.category}</span>
                                     <h2 className="text-5xl font-serif italic tracking-tighter">{selectedProduct.name}</h2>
                                  </div>
-                                 <p className="text-3xl font-serif text-amber-500">{selectedProduct.currency ? selectedProduct.currency : '$'}{selectedProduct.price}</p>
+                                 <p className="text-3xl font-serif text-amber-500">{selectedProduct.currency ? selectedProduct.currency : '₹'}{selectedProduct.price}</p>
                                  <p className="text-lg font-light opacity-60 leading-relaxed italic">{selectedProduct.description}</p>
                               </div>
 
@@ -695,7 +695,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                            >
                               Experience Scent
                            </button>
-                           <p className="text-3xl font-serif">{featuredProduct.currency ? featuredProduct.currency : '$'}{featuredProduct.price}</p>
+                           <p className="text-3xl font-serif">{featuredProduct.currency ? featuredProduct.currency : '₹'}{featuredProduct.price}</p>
                         </div>
                      </div>
                   </div>
@@ -783,7 +783,7 @@ export const Store: React.FC<StoreProps> = ({ onBack, onAddToCart, theme }) => {
                                  <span className="text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-40 transition-opacity whitespace-nowrap">{product.details}</span>
                               </div>
                            </div>
-                           <p className={`text-2xl font-serif ${isDark ? 'text-amber-500' : 'text-stone-800'}`}>{product.currency ? product.currency : '$'}{product.price}</p>
+                           <p className={`text-2xl font-serif ${isDark ? 'text-amber-500' : 'text-stone-800'}`}>{product.currency ? product.currency : '₹'}{product.price}</p>
                         </div>
                      </motion.div>
                   ))}

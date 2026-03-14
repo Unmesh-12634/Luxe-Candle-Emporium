@@ -133,7 +133,7 @@ export const Cart: React.FC<CartProps> = ({
                       </button>
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="font-serif text-xl text-amber-500">${item.price}</p>
+                      <p className="font-serif text-xl text-amber-500">₹{item.price}</p>
                       <button onClick={() => onRemove(item.id)} className="opacity-50 hover:opacity-100 text-red-400 hover:text-red-500 transition-all p-2 mt-1">
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -149,7 +149,7 @@ export const Cart: React.FC<CartProps> = ({
           <div className="space-y-3">
             <div className="flex justify-between items-end">
               <span className="text-[9px] uppercase tracking-[0.5em] opacity-30 font-bold">Atmosphere Total</span>
-              <span className="text-3xl font-serif tracking-tighter text-white">${total.toFixed(2)}</span>
+              <span className="text-3xl font-serif tracking-tighter text-white">₹{total.toFixed(2)}</span>
             </div>
             <div className="flex justify-between items-end pb-4 border-b border-white/10">
               <span className="text-[9px] uppercase tracking-[0.5em] opacity-30 font-bold">White Glove Delivery</span>

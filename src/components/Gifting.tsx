@@ -7,9 +7,10 @@ import bubbleCandle1 from 'figma:asset/37c645db17b5ecf1641812eae60dcc749024836f.
 import peonyCandle from 'figma:asset/7d9d780091fbbe3c8de325444dbfe13bbbffd8ae.png';
 import oceanCandle1 from 'figma:asset/c0d9c3c974825ada3115f53150a9b6be1a376382.png';
 import icedLatte1 from 'figma:asset/33d57ddd7902a4a440a31a1425f590f82a204559.png';
-import daisyBouquet1 from 'figma:asset/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
 import champagneCandle1 from 'figma:asset/65d14f9ea7c1b190df62615226b294245836027b.png';
 import knotBouquet1 from 'figma:asset/81b1caad13ac4674f07bb48ca5d7ba12d52f9114.png';
+import peonyBouquet1 from '../assets/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
+import daisyBouquet1 from '../assets/32068fcffff9a8c23315136d41f2b6526232b476.png';
 
 interface GiftPack {
   id: string;
@@ -45,7 +46,7 @@ const GIFT_PACKS: GiftPack[] = [
     image: bubbleCandle1,
     items: [
       { name: 'Bubble Candle', image: bubbleCandle1, quantity: 1, fragrance: 'Rose' },
-      { name: 'Peony Bouquet Candle', image: peonyCandle, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
+      { name: 'Peony Bouquet Candle', image: peonyBouquet1, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
       { name: 'Ocean Candle', image: oceanCandle1, quantity: 1, fragrance: 'Ocean Breeze' }
     ]
   },
@@ -61,7 +62,7 @@ const GIFT_PACKS: GiftPack[] = [
     items: [
       { name: 'Champagne Candle', image: champagneCandle1, quantity: 1, fragrance: 'Champagne & Berries' },
       { name: 'Knot Bouquet Candle', image: knotBouquet1, quantity: 1, fragrance: 'Lavender' },
-      { name: 'Daisy Bouquet Candle', image: daisyBouquet1, quantity: 1, fragrance: 'Jasmine' },
+      { name: 'Daisy Bouquet Candle', image: daisyBouquet1, quantity: 1, fragrance: 'Rose, Jasmine, Lavender, Vanilla' },
       { name: 'Bubble Candle', image: bubbleCandle1, quantity: 2, fragrance: 'Mixed' }
     ]
   },
@@ -75,7 +76,8 @@ const GIFT_PACKS: GiftPack[] = [
     image: icedLatte1,
     items: [
       { name: 'Iced Latte Candle', image: icedLatte1, quantity: 1, fragrance: 'Coffee & Vanilla' },
-      { name: 'Peony Bouquet Candle', image: peonyCandle, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' }
+      { name: 'Peony Bouquet Candle', image: peonyBouquet1, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
+      { name: 'Bubble Candle', image: bubbleCandle1, quantity: 1, fragrance: 'Lavender' }
     ]
   },
   {
@@ -86,10 +88,9 @@ const GIFT_PACKS: GiftPack[] = [
     originalPrice: 796,
     badge: 'Trending',
     category: 'Floral Sets',
-    image: daisyBouquet1,
+    image: peonyBouquet1,
     items: [
-      { name: 'Daisy Bouquet Candle', image: daisyBouquet1, quantity: 1, fragrance: 'Jasmine' },
-      { name: 'Peony Bouquet Candle', image: peonyCandle, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
+      { name: 'Peony Bouquet Candle', image: peonyBouquet1, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
       { name: 'Knot Bouquet Candle', image: knotBouquet1, quantity: 1, fragrance: 'Lavender' },
       { name: 'Bubble Candle', image: bubbleCandle1, quantity: 1, fragrance: 'Jasmine' }
     ]
@@ -119,8 +120,8 @@ const GIFT_PACKS: GiftPack[] = [
     items: [
       { name: 'Champagne Candle', image: champagneCandle1, quantity: 1, fragrance: 'Champagne & Berries' },
       { name: 'Knot Bouquet Candle', image: knotBouquet1, quantity: 1, fragrance: 'Lavender' },
-      { name: 'Daisy Bouquet Candle', image: daisyBouquet1, quantity: 1, fragrance: 'Jasmine' },
-      { name: 'Peony Bouquet Candle', image: peonyCandle, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
+      { name: 'Daisy Bouquet Candle', image: daisyBouquet1, quantity: 1, fragrance: 'Rose, Jasmine, Lavender, Vanilla' },
+      { name: 'Peony Bouquet Candle', image: peonyBouquet1, quantity: 1, fragrance: 'Rose, Lavender, Jasmine' },
       { name: 'Ocean Candle', image: oceanCandle1, quantity: 1, fragrance: 'Ocean Breeze' },
       { name: 'Iced Latte Candle', image: icedLatte1, quantity: 1, fragrance: 'Coffee & Vanilla' },
       { name: 'Bubble Candle', image: bubbleCandle1, quantity: 2, fragrance: 'Mixed' }

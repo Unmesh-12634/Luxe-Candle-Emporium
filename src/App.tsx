@@ -45,9 +45,10 @@ import bubbleCandle1 from 'figma:asset/37c645db17b5ecf1641812eae60dcc749024836f.
 import knotBouquet1 from 'figma:asset/81b1caad13ac4674f07bb48ca5d7ba12d52f9114.png';
 import oceanCandle1 from 'figma:asset/c0d9c3c974825ada3115f53150a9b6be1a376382.png';
 import icedLatte1 from 'figma:asset/33d57ddd7902a4a440a31a1425f590f82a204559.png';
-import daisyBouquet1 from 'figma:asset/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
 import champagneCandle1 from 'figma:asset/65d14f9ea7c1b190df62615226b294245836027b.png';
+import daisyBouquet1 from './assets/32068fcffff9a8c23315136d41f2b6526232b476.png';
 import peonyCandle from 'figma:asset/7d9d780091fbbe3c8de325444dbfe13bbbffd8ae.png';
+import peonyBouquet1 from './assets/a40dfc2904a131986451fd6c94ec74e024e2c1f5.png';
 import ladduCandle1 from 'figma:asset/51c28d9bee12628c01b14baa77c24ebc63efc910.png';
 
 // Hero section images
@@ -529,9 +530,10 @@ export default function App() {
                     { img: oceanCandle1, name: 'Ocean Candle', delay: 0.2 },
                     { img: icedLatte1, name: 'Iced Latte Candle', delay: 0.3 },
                     { img: daisyBouquet1, name: 'Daisy Bouquet', delay: 0.4 },
-                    { img: champagneCandle1, name: 'Champagne Candle', delay: 0.5 },
-                    { img: ladduCandle1, name: 'Laddu Candle', delay: 0.6 },
-                    { img: knotBouquet1, name: 'Knot Bouquet', delay: 0.7 }
+                    { img: peonyBouquet1, name: 'Peony Bouquet', delay: 0.5 },
+                    { img: champagneCandle1, name: 'Champagne Candle', delay: 0.6 },
+                    { img: ladduCandle1, name: 'Laddu Candle', delay: 0.7 },
+                    { img: knotBouquet1, name: 'Knot Bouquet', delay: 0.8 }
                   ].map((candle, i) => (
                     <motion.div
                       key={i}
